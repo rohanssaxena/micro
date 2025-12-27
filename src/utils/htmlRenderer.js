@@ -7,6 +7,19 @@
 export function renderHTML(html, data = {}) {
   let rendered = html;
   
+  // Replace content placeholder (for sidebar layout)
+  if (data.CONTENT !== undefined) {
+    rendered = rendered.replace('{{CONTENT}}', data.CONTENT);
+  }
+  
+  // Replace navigation active states
+  if (data.CHAT_ACTIVE !== undefined) {
+    rendered = rendered.replace('{{CHAT_ACTIVE}}', data.CHAT_ACTIVE);
+  }
+  if (data.DATA_ACTIVE !== undefined) {
+    rendered = rendered.replace('{{DATA_ACTIVE}}', data.DATA_ACTIVE);
+  }
+  
   // Replace prompt value
   rendered = rendered.replace('{{PROMPT}}', escapeHtml(data.prompt || ''));
   
@@ -32,7 +45,7 @@ export function renderHTML(html, data = {}) {
  * @param {string} text - Text to escape
  * @returns {string} Escaped HTML
  */
-function escapeHtml(text) {
+export function escapeHtml(text) {
   const map = {
     '&': '&amp;',
     '<': '&lt;',

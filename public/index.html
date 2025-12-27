@@ -16,6 +16,48 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
+            padding: 0;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            min-height: 100vh;
+        }
+
+        .sidebar h2 {
+            color: #333;
+            padding: 0 20px;
+            margin-bottom: 30px;
+            font-size: 1.5em;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 15px 20px;
+            color: #555;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: #f8f9fa;
+            color: #667eea;
+        }
+
+        .nav-link.active {
+            background: #f0f0ff;
+            color: #667eea;
+            border-left-color: #667eea;
+            font-weight: 600;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -119,19 +161,98 @@
         .error .response-label {
             color: #c0392b;
         }
+
+        .data-content {
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+            padding: 40px;
+        }
+
+        .data-content.error-message {
+            color: #e74c3c;
+            background: #fee;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 14px;
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .data-table th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        .data-table th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        .data-table tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background 0.2s;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .data-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .data-table td {
+            padding: 14px 16px;
+            color: #333;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        .data-table tbody tr:nth-child(even):hover {
+            background: #f0f0f0;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Gemini Chat</h1>
-        <form method="POST" action="/">
-            <div class="form-group">
-                <label for="prompt">Enter your prompt:</label>
-                <textarea id="prompt" name="prompt" placeholder="Type your question or prompt here..." required>{{PROMPT}}</textarea>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-        {{RESPONSE_SECTION}}
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <a href="/chat" class="nav-link {{CHAT_ACTIVE}}">Chat</a>
+        <a href="/data" class="nav-link {{DATA_ACTIVE}}">Data</a>
+    </div>
+    <div class="main-content">
+        <div class="container">
+            {{CONTENT}}
+        </div>
     </div>
 </body>
 </html>
