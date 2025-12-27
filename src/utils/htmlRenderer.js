@@ -19,6 +19,9 @@ export function renderHTML(html, data = {}) {
   if (data.DATA_ACTIVE !== undefined) {
     rendered = rendered.replace('{{DATA_ACTIVE}}', data.DATA_ACTIVE);
   }
+  if (data.LEARN_ACTIVE !== undefined) {
+    rendered = rendered.replace('{{LEARN_ACTIVE}}', data.LEARN_ACTIVE);
+  }
   
   // Replace prompt value
   rendered = rendered.replace('{{PROMPT}}', escapeHtml(data.prompt || ''));

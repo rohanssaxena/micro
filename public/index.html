@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: white;
             min-height: 100vh;
             display: flex;
             padding: 0;
@@ -24,7 +24,13 @@
             background: white;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px 0;
-            min-height: 100vh;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
         }
 
         .sidebar h2 {
@@ -55,21 +61,279 @@
             font-weight: 600;
         }
 
+        .sidebar-content {
+            flex: 1;
+        }
+
+        .theme-toggle {
+            padding: 15px 20px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: auto;
+        }
+
+        .theme-toggle-label {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .theme-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .theme-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            color: #555;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .theme-btn:hover {
+            background: #f8f9fa;
+            border-color: #667eea;
+        }
+
+        .theme-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .profile-link {
+            display: block;
+            padding: 15px 20px;
+            color: #555;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+            border-top: 1px solid #e0e0e0;
+            margin-top: auto;
+        }
+
+        .profile-link:hover {
+            background: #f8f9fa;
+            color: #667eea;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background: #1a1a1a;
+        }
+
+        body.dark-mode .sidebar {
+            background: #2d2d2d;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-mode .sidebar h2 {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .nav-link {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .nav-link:hover {
+            background: #3a3a3a;
+            color: #667eea;
+        }
+
+        body.dark-mode .nav-link.active {
+            background: #3a3a3a;
+            color: #667eea;
+        }
+
+        body.dark-mode .container {
+            background: #2d2d2d;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-mode .mind-map-card {
+            background: #2d2d2d;
+        }
+
+        body.dark-mode .mind-map-card h2 {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .mind-map-node {
+            background: #3a3a3a;
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .mind-map-node {
+            transition: background 0.08s cubic-bezier(0.4, 0, 0.2, 1), 
+                        border-color 0.08s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: background, border-color;
+        }
+
+        body.dark-mode .mind-map-node:hover {
+            background: #1e3a5f;
+            border-color: #2196f3;
+        }
+
+        body.dark-mode .theme-toggle {
+            border-top-color: #555;
+        }
+
+        body.dark-mode .theme-btn {
+            background: #3a3a3a;
+            border-color: #555;
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .theme-btn:hover {
+            background: #4a4a4a;
+        }
+
+        body.dark-mode .profile-link {
+            border-top-color: #555;
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .profile-link:hover {
+            background: #3a3a3a;
+            color: #667eea;
+        }
+
         .main-content {
             flex: 1;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-start;
             padding: 20px;
+            width: 100%;
+            margin-left: 250px;
+            margin-right: 280px;
+        }
+
+        .right-sidebar {
+            width: 280px;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .right-sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .right-sidebar-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        .right-sidebar-divider {
+            height: 1px;
+            background: #e0e0e0;
+            margin: 20px 0;
+        }
+
+        .right-sidebar-button {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .right-sidebar-button:hover {
+            background: #f8f9fa;
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .right-sidebar-button:active {
+            transform: scale(0.98);
+        }
+
+        .right-sidebar-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .right-sidebar-button:disabled:hover {
+            background: white;
+            border-color: #e0e0e0;
+            color: #333;
+        }
+
+        body.dark-mode .right-sidebar-button:disabled:hover {
+            background: #3a3a3a;
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .right-sidebar {
+            background: #2d2d2d;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-mode .right-sidebar-section-title {
+            color: #b0b0b0;
+        }
+
+        body.dark-mode .right-sidebar-divider {
+            background: #555;
+        }
+
+        body.dark-mode .right-sidebar-button {
+            background: #3a3a3a;
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .right-sidebar-button:hover {
+            background: #4a4a4a;
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .right-sidebar-empty {
+            padding: 40px 20px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        body.dark-mode .right-sidebar-empty {
+            color: #666;
         }
 
         .container {
             background: white;
             border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             padding: 40px;
-            max-width: 800px;
             width: 100%;
+            max-width: none;
         }
 
         h1 {
@@ -241,18 +505,878 @@
         .data-table tbody tr:nth-child(even):hover {
             background: #f0f0f0;
         }
+
+        /* Mind Map Styles */
+        .mind-map-card {
+            margin-top: 0;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .mind-map-container {
+            position: relative;
+            min-height: 400px;
+            padding: 20px 0;
+        }
+
+        .mind-map-columns {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mind-map-column {
+            position: relative;
+            flex: 1;
+            min-width: 150px;
+            max-width: 180px;
+        }
+
+        .mind-map-node {
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.08s cubic-bezier(0.4, 0, 0.2, 1), 
+                        border-color 0.08s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
+            width: 100%;
+            z-index: 3;
+            will-change: background, border-color;
+        }
+
+        .mind-map-node:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .mind-map-node.selected {
+            border: 2px dashed #2196f3;
+            animation: dash-animation 1s linear infinite;
+        }
+
+        @keyframes dash-animation {
+            0% {
+                border-color: #2196f3;
+            }
+            50% {
+                border-color: #64b5f6;
+            }
+            100% {
+                border-color: #2196f3;
+            }
+        }
+
+        body.dark-mode .mind-map-node.selected {
+            border-color: #2196f3;
+            background: #1e3a5f;
+        }
+
+        .mind-map-node-l1 {
+            background: #f5f5f5;
+            color: #333;
+            border-color: #e0e0e0;
+        }
+
+        .mind-map-node-l2 {
+            background: #f5f5f5;
+            color: #333;
+            border-color: #e0e0e0;
+        }
+
+        .mind-map-node-stack {
+            background: #f5f5f5;
+            color: #333;
+            border-color: #e0e0e0;
+        }
+
+        .mind-map-node-content {
+            text-align: left;
+        }
+
+        .mind-map-node-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .mind-map-node-desc {
+            font-size: 12px;
+            opacity: 0.7;
+            line-height: 1.4;
+            color: #666;
+        }
+
+        body.dark-mode .mind-map-node-desc {
+            color: #b0b0b0;
+            opacity: 0.9;
+        }
+
+        .mind-map-node-progress-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            gap: 8px;
+        }
+
+        .mind-map-progress-bar {
+            flex: 1;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        body.dark-mode .mind-map-progress-bar {
+            background: #555;
+        }
+
+        .mind-map-progress-fill {
+            height: 100%;
+            background: #4caf50;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .mind-map-progress-text {
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        body.dark-mode .mind-map-progress-text {
+            color: #b0b0b0;
+        }
+
+        .mind-map-connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .mind-map-connection {
+            stroke: #999;
+            fill: none;
+            opacity: 0.6;
+        }
+
+        .mind-map-connection-l1-l2 {
+            stroke: #999;
+        }
+
+        .mind-map-connection-l2-stack {
+            stroke: #999;
+        }
+
+        .mind-map-empty,
+        .mind-map-error {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .mind-map-error {
+            color: #e74c3c;
+        }
+
+        /* Learn Page Styles */
+        .learn-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .learn-progress-container {
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .learn-progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .learn-progress-fill {
+            height: 100%;
+            background: #4caf50;
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+
+        .learn-progress-text {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        body.dark-mode .learn-progress-bar {
+            background: #555;
+        }
+
+        body.dark-mode .learn-progress-text {
+            color: #b0b0b0;
+        }
+
+        .learn-questions-container {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .learn-question {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .learn-question {
+            background: #3a3a3a;
+        }
+
+        .learn-question-text h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        body.dark-mode .learn-question-text h2 {
+            color: #e0e0e0;
+        }
+
+        .question-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        body.dark-mode .question-description {
+            color: #b0b0b0;
+        }
+
+        .learn-answers {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .answer-option {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .answer-option:hover {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .answer-option input[type="radio"] {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .answer-option input[type="radio"]:checked + .answer-text {
+            font-weight: 600;
+            color: #2196f3;
+        }
+
+        .answer-option.correct-answer input[type="radio"]:checked + .answer-text {
+            font-weight: 600;
+            color: #2196f3;
+        }
+
+        .answer-text {
+            flex: 1;
+            color: #333;
+        }
+
+        body.dark-mode .answer-option {
+            background: #2d2d2d;
+            border-color: #555;
+        }
+
+        body.dark-mode .answer-option:hover {
+            background: #3a3a3a;
+            border-color: #2196f3;
+        }
+
+        body.dark-mode .answer-text {
+            color: #e0e0e0;
+        }
+
+        .learn-explanation-banner {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+            flex-shrink: 0;
+        }
+
+        .learn-explanation-correct {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            color: #2e7d32;
+        }
+
+        .learn-explanation-incorrect {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            color: #c62828;
+        }
+
+        body.dark-mode .learn-explanation-correct {
+            background: #1b5e20;
+            border-color: #4caf50;
+            color: #81c784;
+        }
+
+        body.dark-mode .learn-explanation-incorrect {
+            background: #b71c1c;
+            border-color: #f44336;
+            color: #ef5350;
+        }
+
+        .learn-actions-wrapper {
+            margin-top: auto;
+            flex-shrink: 0;
+            padding-top: 20px;
+        }
+
+        .learn-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .learn-submit-btn,
+        .learn-skip-btn {
+            padding: 14px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .learn-submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .learn-submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .learn-submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .learn-skip-btn {
+            background: #f0f0f0;
+            color: #666;
+            border: 1px solid #e0e0e0;
+        }
+
+        .learn-skip-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode .learn-skip-btn {
+            background: #3a3a3a;
+            color: #e0e0e0;
+            border-color: #555;
+        }
+
+        body.dark-mode .learn-skip-btn:hover {
+            background: #4a4a4a;
+        }
+
+        .answer-option.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        .answer-option.incorrect-answer {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        body.dark-mode .answer-option.incorrect-answer {
+            background: #b71c1c;
+            border-color: #f44336;
+        }
+
+        .learn-error {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        body.dark-mode .learn-error {
+            color: #b0b0b0;
+        }
+
+        /* Congratulations Screen Styles */
+        .learn-congratulations {
+            display: none;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .congratulations-content {
+            width: 100%;
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            padding: 60px 40px 40px 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0;
+        }
+
+        body.dark-mode .congratulations-content {
+            background: #2d2d2d;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .congratulations-graphic {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .congratulations-title {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        body.dark-mode .congratulations-title {
+            color: #8b9aff;
+        }
+
+        .congratulations-topic {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .congratulations-topic {
+            color: #e0e0e0;
+        }
+
+        .congratulations-topic strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        body.dark-mode .congratulations-topic strong {
+            color: #8b9aff;
+        }
+
+        .congratulations-score {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        body.dark-mode .congratulations-score {
+            color: #b0b0b0;
+        }
+
+        .congratulations-next-topic {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        body.dark-mode .congratulations-next-topic {
+            background: #3a3a3a;
+        }
+
+        .next-topic-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        body.dark-mode .next-topic-label {
+            color: #b0b0b0;
+        }
+
+        .next-topic-name {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        body.dark-mode .next-topic-name {
+            color: #e0e0e0;
+        }
+
+        .congratulations-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            width: 100%;
+            padding: 0 40px 40px 40px;
+        }
+
+        .congratulations-btn {
+            width: 100%;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .congratulations-btn-back {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .congratulations-btn-back:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark-mode .congratulations-btn-back {
+            background: #3a3a3a;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .congratulations-btn-back:hover {
+            background: #4a4a4a;
+        }
+
+        .congratulations-btn-continue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .congratulations-btn-continue:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .congratulations-btn-continue:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #ccc;
+        }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <h2>Navigation</h2>
-        <a href="/chat" class="nav-link {{CHAT_ACTIVE}}">Chat</a>
-        <a href="/data" class="nav-link {{DATA_ACTIVE}}">Data</a>
+        <div class="sidebar-content">
+            <h2>Navigation</h2>
+            <a href="/chat" class="nav-link {{CHAT_ACTIVE}}">Chat</a>
+            <a href="/data" class="nav-link {{DATA_ACTIVE}}">Data</a>
+            <a href="/learn" class="nav-link {{LEARN_ACTIVE}}">Learn</a>
+        </div>
+        <div class="theme-toggle">
+            <div class="theme-toggle-label">Theme</div>
+            <div class="theme-buttons">
+                <button class="theme-btn" data-theme="light">Light</button>
+                <button class="theme-btn" data-theme="dark">Dark</button>
+                <button class="theme-btn active" data-theme="system">System</button>
+            </div>
+        </div>
+        <a href="/profile" class="profile-link">Profile</a>
     </div>
     <div class="main-content">
         <div class="container">
             {{CONTENT}}
         </div>
     </div>
+    <div class="right-sidebar">
+        <div id="right-sidebar-empty" class="right-sidebar-empty">
+            No node selected.
+        </div>
+        <div id="right-sidebar-content" style="display: none;">
+            <div class="right-sidebar-section">
+                <button class="right-sidebar-button">Next</button>
+                <button class="right-sidebar-button">Select</button>
+            </div>
+            <div class="right-sidebar-divider"></div>
+            <div class="right-sidebar-section">
+                <div class="right-sidebar-section-title">Actions</div>
+                <button class="right-sidebar-button">Mark as Complete</button>
+                <button class="right-sidebar-button">Flag</button>
+                <button class="right-sidebar-button">Save</button>
+                <button class="right-sidebar-button">Activate</button>
+                <button class="right-sidebar-button" id="learn-button" disabled>Learn</button>
+                <button class="right-sidebar-button">Review</button>
+                <button class="right-sidebar-button">About</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Theme management
+        function initTheme() {
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            
+            // Set active button
+            themeButtons.forEach(btn => {
+                if (btn.dataset.theme === savedTheme) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            applyTheme(savedTheme);
+            
+            // Add click handlers
+            themeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const theme = btn.dataset.theme;
+                    localStorage.setItem('theme', theme);
+                    
+                    themeButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    applyTheme(theme);
+                });
+            });
+        }
+        
+        function applyTheme(theme) {
+            const body = document.body;
+            
+            if (theme === 'system') {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDark) {
+                    body.classList.add('dark-mode');
+                } else {
+                    body.classList.remove('dark-mode');
+                }
+            } else if (theme === 'dark') {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            if (savedTheme === 'system') {
+                applyTheme('system');
+            }
+        });
+        
+        // Initialize theme on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTheme);
+        } else {
+            initTheme();
+        }
+        
+        // Node selection functionality
+        let selectedNode = null;
+        let selectedTopicId = null;
+
+        function initNodeSelection() {
+            const nodes = document.querySelectorAll('.mind-map-node');
+            const emptyMessage = document.getElementById('right-sidebar-empty');
+            const sidebarContent = document.getElementById('right-sidebar-content');
+            const learnButton = document.getElementById('learn-button');
+            
+            // Initialize Learn button as disabled
+            if (learnButton) {
+                learnButton.disabled = true;
+            }
+            
+            nodes.forEach(node => {
+                node.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    
+                    // Deselect previous node
+                    if (selectedNode) {
+                        selectedNode.classList.remove('selected');
+                    }
+                    
+                    // Select new node
+                    selectedNode = node;
+                    node.classList.add('selected');
+                    
+                    // Check if it's a stack node (third column) and get topic_id
+                    const topicId = node.getAttribute('data-topic-id');
+                    if (topicId && node.classList.contains('mind-map-node-stack')) {
+                        selectedTopicId = topicId;
+                        if (learnButton) {
+                            learnButton.disabled = false;
+                            learnButton.style.opacity = '1';
+                            learnButton.style.cursor = 'pointer';
+                        }
+                    } else {
+                        selectedTopicId = null;
+                        if (learnButton) {
+                            learnButton.disabled = true;
+                            learnButton.style.opacity = '0.5';
+                            learnButton.style.cursor = 'not-allowed';
+                        }
+                    }
+                    
+                    // Show sidebar content
+                    if (emptyMessage) emptyMessage.style.display = 'none';
+                    if (sidebarContent) sidebarContent.style.display = 'block';
+                });
+            });
+            
+            // Learn button click handler
+            if (learnButton) {
+                learnButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (selectedTopicId && !learnButton.disabled) {
+                        window.location.href = '/learn?topic_id=' + selectedTopicId;
+                    }
+                });
+            }
+            
+            // Click outside to deselect
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.mind-map-node') && !e.target.closest('.right-sidebar')) {
+                    if (selectedNode) {
+                        selectedNode.classList.remove('selected');
+                        selectedNode = null;
+                        selectedTopicId = null;
+                        
+                        if (learnButton) {
+                            learnButton.disabled = true;
+                            learnButton.style.opacity = '0.5';
+                            learnButton.style.cursor = 'not-allowed';
+                        }
+                        
+                        // Show empty message
+                        if (emptyMessage) emptyMessage.style.display = 'block';
+                        if (sidebarContent) sidebarContent.style.display = 'none';
+                    }
+                }
+            });
+        }
+        
+        // Initialize node selection on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(initNodeSelection, 100);
+            });
+        } else {
+            setTimeout(initNodeSelection, 100);
+        }
+        
+        // Draw mind map connections with curved paths
+        function drawMindMapConnections() {
+            const svg = document.querySelector('.mind-map-connections');
+            if (!svg) return;
+            
+            const connections = svg.querySelectorAll('.mind-map-connection');
+            
+            connections.forEach(conn => {
+                const fromId = conn.getAttribute('data-from');
+                const toId = conn.getAttribute('data-to');
+                const connType = conn.classList.contains('mind-map-connection-l1-l2') ? 'l1-l2' : 'l2-stack';
+                
+                const fromNode = document.getElementById(fromId);
+                const toNode = document.getElementById(toId);
+                
+                if (!fromNode || !toNode) return;
+                
+                const fromRect = fromNode.getBoundingClientRect();
+                const toRect = toNode.getBoundingClientRect();
+                const svgRect = svg.getBoundingClientRect();
+                
+                // Calculate start point (right side of source node)
+                const fromX = fromRect.right - svgRect.left;
+                const fromY = fromRect.top + fromRect.height / 2 - svgRect.top;
+                
+                // Calculate end point (left side of target node)
+                const toX = toRect.left - svgRect.left;
+                const toY = toRect.top + toRect.height / 2 - svgRect.top;
+                
+                // Calculate control point for the curve
+                // The curve should start horizontally from the right side, curve gracefully, then approach horizontally from the left
+                const distance = toX - fromX;
+                const controlX1 = fromX + distance * 0.3; // Control point 30% along the way
+                const controlY1 = fromY; // Start at same Y level
+                const controlX2 = fromX + distance * 0.7; // Control point 70% along the way
+                const controlY2 = toY; // End at target Y level
+                
+                // Create a smooth cubic bezier curve (C command)
+                // The curve starts horizontally, curves in the middle, and ends horizontally
+                const pathData = `M ${fromX},${fromY} C ${controlX1},${controlY1} ${controlX2},${controlY2} ${toX},${toY}`;
+                
+                conn.setAttribute('d', pathData);
+            });
+        }
+        
+        // Draw connections when page loads and on resize
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(drawMindMapConnections, 100);
+            });
+        } else {
+            setTimeout(drawMindMapConnections, 100);
+        }
+        
+        window.addEventListener('resize', () => {
+            setTimeout(drawMindMapConnections, 100);
+        });
+    </script>
 </body>
 </html>
