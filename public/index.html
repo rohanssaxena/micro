@@ -13,71 +13,210 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: white;
+            background: #0f0e0c;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             padding: 0;
+            color: #e0e0e0;
+            font-size: 13px;
+        }
+
+        .top-bar {
+            height: 50px;
+            background: #201E18;
+            border: 0.5px solid #1B1913;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            z-index: 1000;
+            gap: 20px;
+        }
+
+        body:not(.dark-mode) .top-bar {
+            background: #ffffff;
+            border-color: #e0e0e0;
+        }
+
+        body.dark-mode .top-bar {
+            background: #201E18;
+            border-color: #1B1913;
+        }
+
+        .menu-toggle {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.2s;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .menu-toggle:hover {
+            background: #e8e8e8;
+        }
+
+        body.dark-mode .menu-toggle {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .menu-toggle:hover {
+            background: #2d2d2d;
+        }
+
+        .menu-toggle-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .breadcrumb {
+            flex: 1;
+            color: #d0d0d0;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        body:not(.dark-mode) .breadcrumb {
+            color: #d0d0d0;
+        }
+
+        .breadcrumb-separator {
+            color: #999;
+            margin: 0 4px;
+        }
+
+        body:not(.dark-mode) .breadcrumb-separator {
+            color: #999;
+        }
+
+        .time-display {
+            color: #d0d0d0;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        body:not(.dark-mode) .time-display {
+            color: #d0d0d0;
         }
 
         .sidebar {
             width: 250px;
-            background: white;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            background: #201E18;
+            border: 0.5px solid #1B1913;
+            border-radius: 12px;
             padding: 20px 0;
-            height: 100vh;
+            height: calc(100vh - 80px);
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 70px;
+            left: 10px;
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-100%);
         }
 
         .sidebar h2 {
-            color: #333;
+            color: #e0e0e0;
             padding: 0 20px;
-            margin-bottom: 30px;
-            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            font-weight: 600;
         }
 
         .nav-link {
-            display: block;
-            padding: 15px 20px;
-            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            color: #d0d0d0;
             text-decoration: none;
             transition: background 0.3s, color 0.3s;
             border-left: 3px solid transparent;
+            font-size: 13px;
         }
 
         .nav-link:hover {
-            background: #f8f9fa;
-            color: #667eea;
+            background: #2a2820;
+            color: #e0e0e0;
         }
 
         .nav-link.active {
-            background: #f0f0ff;
+            background: #2a2820;
             color: #667eea;
             border-left-color: #667eea;
             font-weight: 600;
         }
 
+        body:not(.dark-mode) .nav-link {
+            color: #d0d0d0;
+        }
+
+        body:not(.dark-mode) .nav-link:hover {
+            background: #2a2820;
+            color: #e0e0e0;
+        }
+
+        body:not(.dark-mode) .nav-link.active {
+            background: #2a2820;
+            color: #667eea;
+        }
+
+        .nav-link-icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
         .sidebar-content {
             flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .theme-toggle {
             padding: 15px 20px;
-            border-top: 1px solid #e0e0e0;
+            border-top: 0.5px solid #3a3830;
             margin-top: auto;
+        }
+
+        body:not(.dark-mode) .theme-toggle {
+            border-top-color: #e0e0e0;
+        }
+
+        body.dark-mode .theme-toggle {
+            border-top-color: #3a3830;
         }
 
         .theme-toggle-label {
             display: block;
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 8px;
+            font-size: 11px;
+            color: #d0d0d0;
+            margin-bottom: 6px;
             font-weight: 500;
         }
+
 
         .theme-buttons {
             display: flex;
@@ -86,19 +225,31 @@
 
         .theme-btn {
             flex: 1;
-            padding: 8px 12px;
-            border: 1px solid #e0e0e0;
-            background: white;
-            color: #555;
+            padding: 6px 10px;
+            border: 1px solid #3a3830;
+            background: #2a2820;
+            color: #d0d0d0;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s;
+            font-size: 11px;
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+            position: relative;
+        }
+
+        body:not(.dark-mode) .theme-btn {
+            border-color: #e0e0e0;
+            background: #f5f5f5;
+            color: #666;
         }
 
         .theme-btn:hover {
-            background: #f8f9fa;
-            border-color: #667eea;
+            background: #3a3a3a;
+            border-color: #555;
+        }
+
+        body:not(.dark-mode) .theme-btn:hover {
+            background: #e8e8e8;
+            border-color: #d0d0d0;
         }
 
         .theme-btn.active {
@@ -107,56 +258,208 @@
             border-color: #667eea;
         }
 
+        body:not(.dark-mode) .theme-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+
         .profile-link {
             display: block;
             padding: 15px 20px;
-            color: #555;
+            color: #d0d0d0;
             text-decoration: none;
             transition: background 0.3s, color 0.3s;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid #3a3830;
             margin-top: auto;
         }
 
         .profile-link:hover {
-            background: #f8f9fa;
+            background: #2a2820;
             color: #667eea;
+        }
+
+
+        /* Light mode styles */
+        body:not(.dark-mode) {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        body:not(.dark-mode) .main-content {
+            background: #ffffff;
+            border-color: #e0e0e0;
+        }
+
+        body:not(.dark-mode) .sidebar {
+            background: #ffffff;
+            border-color: #e0e0e0;
+        }
+
+        body:not(.dark-mode) .right-sidebar {
+            background: #ffffff;
+            border-color: #e0e0e0;
+        }
+
+
+        body:not(.dark-mode) .nav-link {
+            color: #666;
+        }
+
+        body:not(.dark-mode) .nav-link:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        body:not(.dark-mode) .nav-link.active {
+            background: #f0f0f0;
+            color: #667eea;
+        }
+
+        body:not(.dark-mode) .sidebar h2 {
+            color: #333;
+        }
+
+        body:not(.dark-mode) .theme-toggle-label {
+            color: #666;
+        }
+
+        body:not(.dark-mode) .theme-btn {
+            border-color: #e0e0e0;
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        body:not(.dark-mode) .theme-btn:hover {
+            background: #e8e8e8;
+            border-color: #d0d0d0;
+        }
+
+        body:not(.dark-mode) .profile-link {
+            color: #666;
+            border-top-color: #e0e0e0;
+        }
+
+        body:not(.dark-mode) .profile-link:hover {
+            background: #f0f0f0;
+            color: #667eea;
+        }
+
+        body:not(.dark-mode) .breadcrumb {
+            color: #666;
+        }
+
+        body:not(.dark-mode) .breadcrumb-separator {
+            color: #999;
+        }
+
+        body:not(.dark-mode) .time-display {
+            color: #666;
+        }
+
+        body:not(.dark-mode) .right-sidebar-section-title {
+            color: #999;
+        }
+
+        body:not(.dark-mode) .right-sidebar-divider {
+            background: #e0e0e0;
+        }
+
+
+        body:not(.dark-mode) .action-shortcut {
+            color: #999;
+        }
+
+
+        body:not(.dark-mode) .right-sidebar-empty {
+            color: #999;
+        }
+
+        body:not(.dark-mode) .container {
+            color: #333;
+        }
+
+        /* Nodes look the same in both light and dark mode */
+        body:not(.dark-mode) .mind-map-node-l1,
+        body:not(.dark-mode) .mind-map-node-l2,
+        body:not(.dark-mode) .mind-map-node-stack,
+        body:not(.dark-mode) .mind-map-node {
+            background: #ffffff;
+            color: #333;
+            border: 0.5px solid #e0e0e0;
+        }
+
+        body:not(.dark-mode) .mind-map-node:hover {
+            background: #f5f5f5;
+            border: 1px solid #2196f3;
+        }
+
+        body:not(.dark-mode) .mind-map-node.selected {
+            border: 1px solid #2196f3;
+            background: #f5f5f5;
         }
 
         /* Dark mode styles */
         body.dark-mode {
-            background: #1a1a1a;
+            background: #0f0e0c;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .main-content {
+            background: #201E18;
+            border-color: #1B1913;
+        }
+
+        body.dark-mode .container {
+            background: #201E18;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .mind-map-card {
+            background: #201E18;
         }
 
         body.dark-mode .sidebar {
-            background: #2d2d2d;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+            background: #201E18;
+            border-color: #1B1913;
+        }
+
+        body.dark-mode .right-sidebar {
+            background: #201E18;
+            border-color: #1B1913;
         }
 
         body.dark-mode .sidebar h2 {
             color: #e0e0e0;
         }
 
+        body:not(.dark-mode) .sidebar h2 {
+            color: #333;
+        }
+
         body.dark-mode .nav-link {
-            color: #b0b0b0;
+            color: #d0d0d0;
         }
 
         body.dark-mode .nav-link:hover {
-            background: #3a3a3a;
-            color: #667eea;
+            background: #2a2820;
+            color: #e0e0e0;
         }
 
         body.dark-mode .nav-link.active {
-            background: #3a3a3a;
+            background: #2a2820;
             color: #667eea;
         }
 
         body.dark-mode .container {
-            background: #2d2d2d;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            background: transparent;
+            box-shadow: none;
+            color: #e0e0e0;
         }
 
         body.dark-mode .mind-map-card {
-            background: #2d2d2d;
+            background: transparent;
         }
 
         body.dark-mode .mind-map-card h2 {
@@ -164,25 +467,19 @@
         }
 
         body.dark-mode .mind-map-node {
-            background: #3a3a3a;
-            border-color: #555;
+            background: #2a2820;
+            border: 0.5px solid #3a3830;
             color: #e0e0e0;
-        }
-
-        body.dark-mode .mind-map-node {
             transition: background 0.08s cubic-bezier(0.4, 0, 0.2, 1), 
                         border-color 0.08s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: background, border-color;
         }
 
         body.dark-mode .mind-map-node:hover {
-            background: #1e3a5f;
-            border-color: #2196f3;
+            background: #323028;
+            border: 1px solid #2196f3;
         }
 
-        body.dark-mode .theme-toggle {
-            border-top-color: #555;
-        }
 
         body.dark-mode .theme-btn {
             background: #3a3a3a;
@@ -210,20 +507,34 @@
             justify-content: flex-start;
             align-items: flex-start;
             padding: 20px;
-            width: 100%;
-            margin-left: 250px;
-            margin-right: 280px;
+            width: calc(100% - 250px - 280px - 40px);
+            margin-left: 270px;
+            margin-right: 300px;
+            margin-top: 70px;
+            transition: margin-left 0.3s ease, width 0.3s ease;
+            background: #201E18;
+            border: 0.5px solid #1B1913;
+            border-radius: 12px;
+            min-height: calc(100vh - 90px);
+            overflow: hidden;
         }
+
+        .main-content.sidebar-collapsed {
+            width: calc(100% - 280px - 40px);
+            margin-left: 20px;
+        }
+
 
         .right-sidebar {
             width: 280px;
-            background: white;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            background: #201E18;
+            border: 0.5px solid #1B1913;
+            border-radius: 12px;
             padding: 20px;
-            height: 100vh;
+            height: calc(100vh - 80px);
             position: fixed;
-            top: 0;
-            right: 0;
+            top: 70px;
+            right: 10px;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
@@ -234,44 +545,115 @@
         }
 
         .right-sidebar-section-title {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
             color: #666;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
             padding: 0 4px;
         }
 
+        body.dark-mode .right-sidebar-section-title {
+            color: #666;
+        }
+
         .right-sidebar-divider {
-            height: 1px;
-            background: #e0e0e0;
+            height: 0.5px;
+            background: #3a3830;
             margin: 20px 0;
+        }
+
+        body.dark-mode .right-sidebar-divider {
+            background: #3a3830;
+        }
+
+
+        .right-sidebar-button-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .right-sidebar-button-group .right-sidebar-button {
+            flex: 1;
+            margin-bottom: 0;
         }
 
         .right-sidebar-button {
             width: 100%;
-            padding: 12px 16px;
+            padding: 12px 8px;
             margin-bottom: 8px;
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            color: #333;
-            font-size: 14px;
+            background: #252525;
+            border: none;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: background 0.2s;
             text-align: left;
+            display: flex;
+            align-items: center;
+        }
+
+        body.dark-mode .right-sidebar-button {
+            background: #252525;
+            color: #e0e0e0;
+        }
+
+        body:not(.dark-mode) .right-sidebar-button {
+            background: #f5f5f5;
+            color: #333;
         }
 
         .right-sidebar-button:hover {
-            background: #f8f9fa;
-            border-color: #667eea;
-            color: #667eea;
+            background: #2d2d2d;
         }
 
-        .right-sidebar-button:active {
-            transform: scale(0.98);
+        body.dark-mode .right-sidebar-button:hover {
+            background: #2d2d2d;
+        }
+
+        body:not(.dark-mode) .right-sidebar-button:hover {
+            background: #e8e8e8;
+        }
+
+        /* Special styling for Next button */
+        .right-sidebar-button-next {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        body.dark-mode .right-sidebar-button-next {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        body:not(.dark-mode) .right-sidebar-button-next {
+            background: #4a5568;
+            color: #ffffff;
+        }
+
+        .right-sidebar-button-next:hover {
+            background: #d0d0d0;
+        }
+
+        body.dark-mode .right-sidebar-button-next:hover {
+            background: #d0d0d0;
+        }
+
+        body:not(.dark-mode) .right-sidebar-button-next:hover {
+            background: #5a6578;
+        }
+
+        .right-sidebar-button:active,
+        .right-sidebar-button.active {
+            background: #3a3a3a;
+        }
+
+        body:not(.dark-mode) .right-sidebar-button:active,
+        body:not(.dark-mode) .right-sidebar-button.active {
+            background: #e0e0e0;
         }
 
         .right-sidebar-button:disabled {
@@ -279,15 +661,13 @@
             cursor: not-allowed;
         }
 
-        .right-sidebar-button:disabled:hover {
-            background: white;
-            border-color: #e0e0e0;
-            color: #333;
+        body:not(.dark-mode) .right-sidebar-button:disabled:hover {
+            background: #f5f5f5;
+            color: #999;
         }
 
         body.dark-mode .right-sidebar-button:disabled:hover {
-            background: #3a3a3a;
-            border-color: #555;
+            background: #252525;
             color: #e0e0e0;
         }
 
@@ -311,9 +691,131 @@
         }
 
         body.dark-mode .right-sidebar-button:hover {
-            background: #4a4a4a;
-            border-color: #667eea;
-            color: #667eea;
+            background: #3a3a3a;
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 6px;
+            background: #252525;
+        }
+
+        body.dark-mode .action-item {
+            background: #252525;
+        }
+
+        .action-item:hover {
+            background: #2d2d2d;
+        }
+
+        body.dark-mode .action-item:hover {
+            background: #2d2d2d;
+        }
+
+        .action-item:active,
+        .action-item.active {
+            background: #3a3a3a;
+        }
+
+        body.dark-mode .action-item:active,
+        body.dark-mode .action-item.active {
+            background: #3a3a3a;
+        }
+
+        body:not(.dark-mode) .action-item {
+            background: #f5f5f5;
+        }
+
+        body:not(.dark-mode) .action-item:hover {
+            background: #e8e8e8;
+        }
+
+        body:not(.dark-mode) .action-item:active,
+        body:not(.dark-mode) .action-item.active {
+            background: #e0e0e0;
+        }
+
+        .action-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .action-content {
+            flex: 1;
+        }
+
+        .action-label {
+            font-size: 12px;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        body.dark-mode .action-label {
+            color: #e0e0e0;
+        }
+
+        .action-description {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        body.dark-mode .action-description {
+            color: #b0b0b0;
+        }
+
+        .action-shortcut {
+            font-size: 10px;
+            color: #999;
+            margin-left: 8px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+        }
+
+        .action-item-with-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .action-arrow {
+            color: #999;
+            font-size: 14px;
+            margin-left: 8px;
+        }
+
+        body.dark-mode .action-arrow {
+            color: #999;
+        }
+
+        body.dark-mode .top-bar {
+            background: #0f0e0c;
+            border-bottom-color: #1B1913;
+        }
+
+        body.dark-mode .sidebar {
+            background: #201E18;
+            border-color: #1B1913;
+        }
+
+        body.dark-mode .right-sidebar {
+            background: #201E18;
+            border-color: #1B1913;
         }
 
         .right-sidebar-empty {
@@ -324,16 +826,24 @@
         }
 
         body.dark-mode .right-sidebar-empty {
-            color: #666;
+            color: #999;
+        }
+
+        body:not(.dark-mode) .right-sidebar-empty {
+            color: #999;
         }
 
         .container {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            padding: 40px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 0;
             width: 100%;
             max-width: none;
+            height: 100%;
+            overflow: auto;
+            box-sizing: border-box;
+            color: #e0e0e0;
         }
 
         h1 {
@@ -509,16 +1019,27 @@
         /* Mind Map Styles */
         .mind-map-card {
             margin-top: 0;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            box-sizing: border-box;
+            max-height: calc(100vh - 150px);
+        }
+
+        body.dark-mode .mind-map-card {
+            background: transparent;
         }
 
         .mind-map-container {
             position: relative;
             min-height: 400px;
             padding: 20px 0;
+            width: 100%;
+            overflow: visible;
         }
 
         .mind-map-columns {
@@ -528,6 +1049,8 @@
             gap: 40px;
             position: relative;
             z-index: 2;
+            width: fit-content;
+            min-width: 100%;
         }
 
         .mind-map-column {
@@ -538,11 +1061,11 @@
         }
 
         .mind-map-node {
-            background: #f5f5f5;
-            border: 2px solid #e0e0e0;
+            background: #2a2820;
+            border: 0.5px solid #3a3830;
             border-radius: 12px;
             padding: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             transition: background 0.08s cubic-bezier(0.4, 0, 0.2, 1), 
                         border-color 0.08s cubic-bezier(0.4, 0, 0.2, 1);
             position: absolute;
@@ -552,12 +1075,12 @@
         }
 
         .mind-map-node:hover {
-            background: #e3f2fd;
-            border-color: #2196f3;
+            background: #323028;
+            border: 1px solid #2196f3;
         }
 
         .mind-map-node.selected {
-            border: 2px dashed #2196f3;
+            border: 1px solid #2196f3;
             animation: dash-animation 1s linear infinite;
         }
 
@@ -574,27 +1097,47 @@
         }
 
         body.dark-mode .mind-map-node.selected {
-            border-color: #2196f3;
-            background: #1e3a5f;
+            border: 1px solid #2196f3;
+            background: #323028;
         }
 
+
         .mind-map-node-l1 {
-            background: #f5f5f5;
+            background: #2a2820;
+            color: #e0e0e0;
+            border-color: #3a3830;
+        }
+
+        body:not(.dark-mode) .mind-map-node-l1 {
+            background: #ffffff;
             color: #333;
             border-color: #e0e0e0;
         }
 
         .mind-map-node-l2 {
-            background: #f5f5f5;
+            background: #2a2820;
+            color: #e0e0e0;
+            border-color: #3a3830;
+        }
+
+        body:not(.dark-mode) .mind-map-node-l2 {
+            background: #ffffff;
             color: #333;
             border-color: #e0e0e0;
         }
 
         .mind-map-node-stack {
-            background: #f5f5f5;
+            background: #2a2820;
+            color: #e0e0e0;
+            border-color: #3a3830;
+        }
+
+        body:not(.dark-mode) .mind-map-node-stack {
+            background: #ffffff;
             color: #333;
             border-color: #e0e0e0;
         }
+
 
         .mind-map-node-content {
             text-align: left;
@@ -602,19 +1145,33 @@
 
         .mind-map-node-title {
             font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 6px;
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: #e0e0e0;
+        }
+
+        body:not(.dark-mode) .mind-map-node-title {
+            color: #333;
+        }
+
+        .mind-map-node.selected .mind-map-node-title {
+            color: #2196f3;
         }
 
         .mind-map-node-desc {
-            font-size: 12px;
-            opacity: 0.7;
+            font-size: 11px;
+            opacity: 0.8;
             line-height: 1.4;
-            color: #666;
+            color: #c0c0c0;
         }
 
         body.dark-mode .mind-map-node-desc {
-            color: #b0b0b0;
+            color: #c0c0c0;
+            opacity: 0.8;
+        }
+
+        body:not(.dark-mode) .mind-map-node-desc {
+            color: #666;
             opacity: 0.9;
         }
 
@@ -629,9 +1186,13 @@
         .mind-map-progress-bar {
             flex: 1;
             height: 4px;
-            background: #e0e0e0;
+            background: #3a3830;
             border-radius: 2px;
             overflow: hidden;
+        }
+
+        body:not(.dark-mode) .mind-map-progress-bar {
+            background: #e0e0e0;
         }
 
         body.dark-mode .mind-map-progress-bar {
@@ -646,10 +1207,14 @@
         }
 
         .mind-map-progress-text {
-            font-size: 11px;
-            color: #666;
+            font-size: 10px;
+            color: #c0c0c0;
             font-weight: 500;
             white-space: nowrap;
+        }
+
+        body:not(.dark-mode) .mind-map-progress-text {
+            color: #666;
         }
 
         body.dark-mode .mind-map-progress-text {
@@ -1120,12 +1685,32 @@
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <div class="top-bar">
+        <div class="menu-toggle" id="menu-toggle">
+            <div class="menu-toggle-icon">☰</div>
+        </div>
+        <div class="breadcrumb" id="breadcrumb">
+            <span>Home</span>
+            <span class="breadcrumb-separator">/</span>
+            <span>Data</span>
+        </div>
+        <div class="time-display" id="time-display"></div>
+    </div>
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-content">
-            <h2>Navigation</h2>
-            <a href="/chat" class="nav-link {{CHAT_ACTIVE}}">Chat</a>
-            <a href="/data" class="nav-link {{DATA_ACTIVE}}">Data</a>
-            <a href="/learn" class="nav-link {{LEARN_ACTIVE}}">Learn</a>
+            <h2>Micro</h2>
+            <a href="/chat" class="nav-link {{CHAT_ACTIVE}}">
+                <span class="nav-link-icon">💬</span>
+                <span>Chat</span>
+            </a>
+            <a href="/data" class="nav-link {{DATA_ACTIVE}}">
+                <span class="nav-link-icon">📊</span>
+                <span>Data</span>
+            </a>
+            <a href="/learn" class="nav-link {{LEARN_ACTIVE}}">
+                <span class="nav-link-icon">📚</span>
+                <span>Learn</span>
+            </a>
         </div>
         <div class="theme-toggle">
             <div class="theme-toggle-label">Theme</div>
@@ -1137,7 +1722,7 @@
         </div>
         <a href="/profile" class="profile-link">Profile</a>
     </div>
-    <div class="main-content">
+    <div class="main-content" id="main-content">
         <div class="container">
             {{CONTENT}}
         </div>
@@ -1148,19 +1733,85 @@
         </div>
         <div id="right-sidebar-content" style="display: none;">
             <div class="right-sidebar-section">
-                <button class="right-sidebar-button">Next</button>
-                <button class="right-sidebar-button">Select</button>
+                <button class="right-sidebar-button right-sidebar-button-next">Next</button>
+                <div class="right-sidebar-button-group">
+                    <button class="right-sidebar-button">Select</button>
+                    <button class="right-sidebar-button">Edit</button>
+                </div>
             </div>
             <div class="right-sidebar-divider"></div>
             <div class="right-sidebar-section">
-                <div class="right-sidebar-section-title">Actions</div>
-                <button class="right-sidebar-button">Mark as Complete</button>
-                <button class="right-sidebar-button">Flag</button>
-                <button class="right-sidebar-button">Save</button>
-                <button class="right-sidebar-button">Activate</button>
-                <button class="right-sidebar-button" id="learn-button" disabled>Learn</button>
-                <button class="right-sidebar-button">Review</button>
-                <button class="right-sidebar-button">About</button>
+                <div class="right-sidebar-section-title">ACTIONS</div>
+                <div class="action-item">
+                    <div class="action-icon">✓</div>
+                    <div class="action-content">
+                        <div class="action-label">
+                            Mark as Complete
+                            <span class="action-shortcut">⌘⇧C</span>
+                        </div>
+                        <div class="action-description">Set completion status to 100%.</div>
+                    </div>
+                </div>
+                <div class="action-item">
+                    <div class="action-icon">⚡</div>
+                    <div class="action-content">
+                        <div class="action-label">
+                            Activate
+                            <span class="action-shortcut">⌘C</span>
+                        </div>
+                        <div class="action-description">Don't include this topic in lesson and review.</div>
+                    </div>
+                </div>
+                <div class="action-item">
+                    <div class="action-icon">🚩</div>
+                    <div class="action-content">
+                        <div class="action-label">
+                            Flag
+                            <span class="action-shortcut">⌘⇧F</span>
+                        </div>
+                        <div class="action-description">Mark this topic as something or not.</div>
+                    </div>
+                </div>
+                <div class="action-item">
+                    <div class="action-icon">💾</div>
+                    <div class="action-content">
+                        <div class="action-label">
+                            Save
+                            <span class="action-shortcut">⌘S</span>
+                        </div>
+                        <div class="action-description">Don't include this topic in lesson and review.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-sidebar-divider"></div>
+            <div class="right-sidebar-section">
+                <div class="right-sidebar-section-title">INTERACT</div>
+                <div class="action-item" id="action-learn">
+                    <div class="action-icon">📚</div>
+                    <div class="action-content action-item-with-arrow">
+                        <div>
+                            <div class="action-label">
+                                Learn
+                                <span class="action-shortcut">⌘L</span>
+                            </div>
+                            <div class="action-description">Set completion status to 100%.</div>
+                        </div>
+                        <span class="action-arrow">→</span>
+                    </div>
+                </div>
+                <div class="action-item">
+                    <div class="action-icon">🔄</div>
+                    <div class="action-content action-item-with-arrow">
+                        <div>
+                            <div class="action-label">
+                                Review
+                                <span class="action-shortcut">⌘R</span>
+                            </div>
+                            <div class="action-description">Set completion status to 100%.</div>
+                        </div>
+                        <span class="action-arrow">→</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1197,6 +1848,12 @@
         
         function applyTheme(theme) {
             const body = document.body;
+            const topBar = document.querySelector('.top-bar');
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            const rightSidebar = document.querySelector('.right-sidebar');
+            const container = document.querySelector('.container');
+            const mindMapCard = document.querySelector('.mind-map-card');
             
             if (theme === 'system') {
                 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -1220,11 +1877,41 @@
             }
         });
         
+        // Apply theme immediately on page load
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        applyTheme(savedTheme);
+        
+        // Initialize menu toggle functionality
+        function initMenuToggle() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('collapsed');
+                    if (mainContent) {
+                        mainContent.classList.toggle('sidebar-collapsed');
+                    }
+                    // Redraw connections when sidebar toggles
+                    setTimeout(() => {
+                        if (typeof drawMindMapConnections === 'function') {
+                            drawMindMapConnections();
+                        }
+                    }, 350); // Wait for transition to complete (300ms + small buffer)
+                });
+            }
+        }
+        
         // Initialize theme on page load
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initTheme);
+            document.addEventListener('DOMContentLoaded', () => {
+                initTheme();
+                initMenuToggle();
+            });
         } else {
             initTheme();
+            initMenuToggle();
         }
         
         // Node selection functionality
@@ -1235,11 +1922,12 @@
             const nodes = document.querySelectorAll('.mind-map-node');
             const emptyMessage = document.getElementById('right-sidebar-empty');
             const sidebarContent = document.getElementById('right-sidebar-content');
-            const learnButton = document.getElementById('learn-button');
+            const learnItem = document.getElementById('action-learn');
             
-            // Initialize Learn button as disabled
-            if (learnButton) {
-                learnButton.disabled = true;
+            // Initialize Learn item styling
+            if (learnItem) {
+                learnItem.style.opacity = '0.5';
+                learnItem.style.pointerEvents = 'none';
             }
             
             nodes.forEach(node => {
@@ -1257,19 +1945,21 @@
                     
                     // Check if it's a stack node (third column) and get topic_id
                     const topicId = node.getAttribute('data-topic-id');
+                    const learnItemEl = document.getElementById('action-learn');
+                    
                     if (topicId && node.classList.contains('mind-map-node-stack')) {
                         selectedTopicId = topicId;
-                        if (learnButton) {
-                            learnButton.disabled = false;
-                            learnButton.style.opacity = '1';
-                            learnButton.style.cursor = 'pointer';
+                        // Enable Learn item
+                        if (learnItemEl) {
+                            learnItemEl.style.opacity = '1';
+                            learnItemEl.style.pointerEvents = 'auto';
                         }
                     } else {
                         selectedTopicId = null;
-                        if (learnButton) {
-                            learnButton.disabled = true;
-                            learnButton.style.opacity = '0.5';
-                            learnButton.style.cursor = 'not-allowed';
+                        // Disable Learn item
+                        if (learnItemEl) {
+                            learnItemEl.style.opacity = '0.5';
+                            learnItemEl.style.pointerEvents = 'none';
                         }
                     }
                     
@@ -1279,15 +1969,23 @@
                 });
             });
             
-            // Learn button click handler
-            if (learnButton) {
-                learnButton.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (selectedTopicId && !learnButton.disabled) {
-                        window.location.href = '/learn?topic_id=' + selectedTopicId;
+            // Add click handlers to all action items
+            document.querySelectorAll('.action-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    // Remove active class from all action items
+                    document.querySelectorAll('.action-item').forEach(i => i.classList.remove('active'));
+                    // Add active class to clicked item
+                    item.classList.add('active');
+                    
+                    // Handle Learn item specifically
+                    if (item.id === 'action-learn') {
+                        e.stopPropagation();
+                        if (selectedTopicId && item.style.pointerEvents !== 'none') {
+                            window.location.href = '/learn?topic_id=' + selectedTopicId;
+                        }
                     }
                 });
-            }
+            });
             
             // Click outside to deselect
             document.addEventListener('click', (e) => {
@@ -1297,10 +1995,10 @@
                         selectedNode = null;
                         selectedTopicId = null;
                         
-                        if (learnButton) {
-                            learnButton.disabled = true;
-                            learnButton.style.opacity = '0.5';
-                            learnButton.style.cursor = 'not-allowed';
+                        const learnItemEl = document.getElementById('action-learn');
+                        if (learnItemEl) {
+                            learnItemEl.style.opacity = '0.5';
+                            learnItemEl.style.pointerEvents = 'none';
                         }
                         
                         // Show empty message

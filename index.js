@@ -1031,7 +1031,8 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on http://0.0.0.0:${PORT}`);
+  console.log(`Accessible at http://localhost:${PORT} or http://YOUR_IP:${PORT}`);
   console.log(`Press Ctrl+C to stop the server`);
 });
